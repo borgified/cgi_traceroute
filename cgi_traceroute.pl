@@ -36,7 +36,7 @@ if (my $session = param('session')) { # returning to pick up session data
 			close STDOUT;             # so parent can go on
 			unless (open F, "-|") {
 				open STDERR, ">&=1";
-				exec "/usr/sbin/traceroute", $host;
+				exec "sudo","/usr/sbin/traceroute","-T", $host;
 				die "Cannot execute traceroute: $!";
 			}
 			my $buf = "";
@@ -60,6 +60,7 @@ exit 0;
 
 sub show_form {
 	print header, start_html("Traceroute"), h1("Traceroute");
+	print "http://www.stonehenge.com/merlyn/LinuxMag/col39.html",hr;
 	print start_form;
 	print submit('traceroute to this host:'), " ", textfield('host');
 	print end_form, end_html;
